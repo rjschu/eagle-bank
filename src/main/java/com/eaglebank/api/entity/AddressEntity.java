@@ -1,14 +1,13 @@
 package com.eaglebank.api.entity;
 
 import com.eaglebank.api.domain.Address;
-import com.eaglebank.api.dto.AddressRequest;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "address")
-public class AddressEntity {
+public class AddressEntity implements Patchable<Address, AddressEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,5 +65,16 @@ public class AddressEntity {
 
     public String getPostcode() {
         return postcode;
+    }
+
+    @Override
+    public AddressEntity patch(Address patched) {
+        this.line1 = patched.getLine1();
+        this.line2 = patched.getLine2();
+        this.line3 = patched.getLine3();
+        this.town = patched.getTown();
+        this.county = patched.getCounty();
+        this.postcode = patched.getPostcode();
+        return this;
     }
 }

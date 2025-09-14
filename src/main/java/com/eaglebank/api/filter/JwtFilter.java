@@ -47,15 +47,15 @@ public class JwtFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, List.of(UserRole.USER::getRoleName));
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
-                    filterChain.doFilter(request, response);
                 }
             }catch (SignatureException exception) {
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 response.setHeader("Content-Type", "application/json");
                 ErrorMessage errorMessage = new ErrorMessage("Invalid token");
                 response.getWriter().write(objectMapper.writeValueAsString(errorMessage));
+                return;
             }
-
         }
+        filterChain.doFilter(request, response);
     }
 }

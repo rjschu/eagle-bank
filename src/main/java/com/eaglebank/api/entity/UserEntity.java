@@ -12,7 +12,7 @@ import java.time.Instant;
     indexes = {
         @Index(name="userEmailIdx", columnList = "email", unique = true)
     })
-public class UserEntity {
+public class UserEntity implements Patchable<User, UserEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class UserEntity {
     private String email;
     private String phoneNumber;
 
-    @ManyToOne(cascade = CascadeType.ALL    )
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 
@@ -85,5 +85,14 @@ public class UserEntity {
 
     public Instant getUpdatedTimestamp() {
         return updatedTimestamp;
+    }
+
+
+    public UserEntity patch(User updateFrom) {
+        this.name = updateFrom.getName();
+        this.email =  updateFrom.getEmail();
+        this.phoneNumber = updateFrom.getPhoneNumber();
+        this.address = address.patch(updateFrom.getAddress());
+        return this;
     }
 }

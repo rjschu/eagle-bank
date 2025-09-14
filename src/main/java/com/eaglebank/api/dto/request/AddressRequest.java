@@ -1,4 +1,4 @@
-package com.eaglebank.api.dto;
+package com.eaglebank.api.dto.request;
 
 import com.eaglebank.api.domain.Address;
 import jakarta.validation.constraints.NotBlank;

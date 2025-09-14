@@ -1,6 +1,5 @@
-package com.eaglebank.api.dto;
+package com.eaglebank.api.dto.request;
 
-import com.eaglebank.api.domain.Address;
 import com.eaglebank.api.domain.User;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -14,6 +13,12 @@ public record CreateUserRequest(@NotBlank String name,
                                 @NotBlank String password,
                                 @Valid AddressRequest address) {
     public User toDomain() {
-        return new User(this.name, this.email, this.phoneNumber(), address.toDomain(), password);
+        return User.UserBuilder.builder()
+                .withName(name)
+                .withEmail(email)
+                .withPassword(password)
+                .withPhoneNumber(phoneNumber)
+                .withAddress(address.toDomain())
+                .build();
     }
 }
