@@ -1,7 +1,5 @@
 package com.eaglebank.api.filter;
 
-import com.eaglebank.api.controller.DefaultControllerAdvice;
-import com.eaglebank.api.domain.AuthUser;
 import com.eaglebank.api.dto.response.ErrorMessage;
 import com.eaglebank.api.enums.UserRole;
 import com.eaglebank.api.service.CustomUserDetailsService;

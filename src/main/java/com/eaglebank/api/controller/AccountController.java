@@ -6,7 +6,6 @@ import com.eaglebank.api.dto.response.AccountResponse;
 import com.eaglebank.api.service.AccountService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

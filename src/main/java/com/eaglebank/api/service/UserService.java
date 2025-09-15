@@ -6,13 +6,13 @@ import com.eaglebank.api.entity.AddressEntity;
 import com.eaglebank.api.entity.UserEntity;
 import com.eaglebank.api.exception.UserNotFoundException;
 import com.eaglebank.api.repository.UserRepository;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.validation.constraints.Pattern;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class UserService {
 
 

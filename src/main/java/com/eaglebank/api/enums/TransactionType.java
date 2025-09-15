@@ -1,11 +1,7 @@
 package com.eaglebank.api.enums;
 
-import com.eaglebank.api.domain.Transaction;
-import com.eaglebank.api.service.TransactionService;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-
-import java.util.function.BiFunction;
 
 public enum TransactionType {
 

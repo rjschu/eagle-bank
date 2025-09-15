@@ -2,21 +2,17 @@ package com.eaglebank.api.service;
 
 import com.eaglebank.api.domain.Account;
 import com.eaglebank.api.domain.AuthUser;
-import com.eaglebank.api.domain.User;
 import com.eaglebank.api.entity.AccountEntity;
 import com.eaglebank.api.entity.UserEntity;
 import com.eaglebank.api.exception.AccountNotFoundException;
 import com.eaglebank.api.repository.AccountRepository;
 import com.eaglebank.api.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.security.Security;
 import java.time.Instant;
 import java.util.List;
-import java.util.function.Function;
 
 @Service
 @Transactional
