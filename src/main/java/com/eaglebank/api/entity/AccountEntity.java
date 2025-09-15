@@ -1,10 +1,8 @@
 package com.eaglebank.api.entity;
 
 import com.eaglebank.api.domain.Account;
-import com.eaglebank.api.domain.User;
 import com.eaglebank.api.enums.AccountType;
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.UpdateTimestamp;

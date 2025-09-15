@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity byEmail = userRepository.findByEmail(email);
-        List<Long> accountIds = accountService.fetchAccounts(byEmail.getId()).stream().map(Account::getId).toList();
+        List<Account> accountIds = accountService.fetchAccounts(byEmail.getId());
         return new AuthUser(byEmail.getEmail(), byEmail.getPassword(), List.of(), byEmail.getId(), accountIds);
     }
 }

@@ -27,14 +27,14 @@ public class AccountController {
     }
 
     @GetMapping("/{accountId}")
-    @PreAuthorize("principal.isAccountOwner(#accountId)")
+    @PreAuthorize("principal.isAccountOwnerByAccountId(#accountId)")
     public AccountResponse getAccount(@PathVariable Long accountId){
         Account account = accountService.fetchAccount(accountId);
         return new AccountResponse(account);
     }
 
     @DeleteMapping("/{accountId}")
-    @PreAuthorize("principal.isAccountOwner(#accountId)")
+    @PreAuthorize("principal.isAccountOwnerByAccountId(#accountId)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAccount(@PathVariable Long accountId){
       accountService.deleteAccount(accountId);

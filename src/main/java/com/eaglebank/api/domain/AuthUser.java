@@ -8,9 +8,9 @@ import java.util.List;
 
 public class AuthUser extends User {
     private Long id;
-    private List<Long> accountIds;
+    private List<Account> accountIds;
 
-    public AuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities, Long id, List<Long> accountIds) {
+    public AuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities, Long id, List<Account> accountIds) {
         super(username, password, authorities);
         this.id = id;
         this.accountIds = accountIds;
@@ -20,11 +20,15 @@ public class AuthUser extends User {
         return String.format("usr-%d",id);
     }
 
-    public List<Long> getAccountIds() {
+    public List<Account> getAccountIds() {
         return accountIds;
     }
 
-    public boolean isAccountOwner(Long accountId){
-        return accountIds.contains(accountId);
+    public boolean isAccountOwnerByAccountId(Long accountId){
+        return accountIds.stream().anyMatch(account -> account.getId().equals(accountId));
+    }
+
+    public boolean isAccountOwnerByAccountNumber(String accountNumber){
+        return accountIds.stream().anyMatch(account -> account.getAccountNumber().equals(accountNumber));
     }
 }

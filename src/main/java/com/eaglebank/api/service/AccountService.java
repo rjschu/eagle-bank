@@ -8,6 +8,7 @@ import com.eaglebank.api.entity.UserEntity;
 import com.eaglebank.api.exception.AccountNotFoundException;
 import com.eaglebank.api.repository.AccountRepository;
 import com.eaglebank.api.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,10 @@ import org.springframework.stereotype.Service;
 import java.security.Security;
 import java.time.Instant;
 import java.util.List;
+import java.util.function.Function;
 
 @Service
+@Transactional
 public class AccountService {
 
     public final AccountRepository accountRepository;
@@ -43,15 +46,20 @@ public class AccountService {
 
     public Account fetchAccount(Long id) {
         return accountRepository.findById(id)
-                .map(this::getAccount)
+                .map(AccountService::getAccount)
                 .orElseThrow(() -> new AccountNotFoundException(String.format("Account %s can not be found",id)));
     }
 
     public List<Account> fetchAccounts(Long userId) {
-        return accountRepository.findAllByUserId(userId).stream().map(this::getAccount).toList();
+        return accountRepository.findAllByUserId(userId).stream().map(AccountService::getAccount).toList();
     }
 
-    private Account getAccount(AccountEntity account) {
+
+    public void modifyBalance(Double amount, Long accountId) {
+        accountRepository.updateBalance(accountId, amount);
+    }
+
+    public static Account getAccount(AccountEntity account) {
         return Account.AccountBuilder.anAccount()
                 .withId(account.getId())
                 .withName(account.getName())
